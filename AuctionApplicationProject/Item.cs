@@ -10,13 +10,11 @@ namespace AuctionApplicationProject
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public double MinimumBid { get; private set; }
 
-        public Item(string name, string description, double minimumBid)
+        public Item(string name, string description, double minimumBid, Seller seller)
         {
             this.Name = name;
             this.Description = description;
-            this.MinimumBid = minimumBid;
         }
     }
 }

@@ -13,6 +13,9 @@ namespace AuctionApplicationProject
         public DateTime StartDateTime { get; private set; }
         public DateTime EndDateTime { get; private set; }
         public DateTime DateTimeCreated { get; private set; }
+        public Seller Seller { get; private set; }
+        public double MinimumBid { get; private set; }
+        public bool IsAwarded { get; private set; }
         public bool IsBiddingPhase
         {
             get
@@ -33,13 +36,26 @@ namespace AuctionApplicationProject
             }
         }
 
-        public ItemBidding(Item item, DateTime startDateTime, DateTime endDateTime)
+        public double HighestBid
+        {
+            get
+            {
+                if (this.HighestBidder == null)
+                    return -1;
+                else
+                    return this.bids[this.HighestBidder];
+            }
+        }
+
+        public ItemBidding(Item item, DateTime startDateTime, DateTime endDateTime, Seller seller, double minimumBid)
         {
             this.item = item;
             this.bids = new Dictionary<Bidder, double>();
             this.StartDateTime = startDateTime;
             this.EndDateTime = endDateTime;
             this.DateTimeCreated = DateTime.Now;
+            this.Seller = seller;
+            this.MinimumBid = minimumBid;
         }
 
         public bool Bid(Bidder bidder, double amount)

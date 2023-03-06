@@ -11,15 +11,20 @@ namespace AuctionApplicationProject
         private static int BIDDER_COUNTER = 1;
 
         public int BidderNumber { get; private set; }
+        public double ActualBalance { get; set; }
+        public double ProjectedBalance { get; set; }
 
-        public Bidder(string name, string username, string password) : base(name, username, password)
+        public Bidder(string name, string username, string password, double initialDeposit) : base(name, username, password)
         {
             this.BidderNumber = BIDDER_COUNTER++;
+            this.ActualBalance = initialDeposit;
+            this.ProjectedBalance = this.ActualBalance;
         }
 
         private Bidder(Bidder bidder) : base (bidder.Name, bidder.Username, bidder.Password)
         {
             this.BidderNumber = bidder.BidderNumber;
+            this.ActualBalance = this.ProjectedBalance = 0;
         }
 
         public object Clone()
