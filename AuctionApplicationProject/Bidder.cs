@@ -6,23 +6,20 @@ using System.Threading.Tasks;
 
 namespace AuctionApplicationProject
 {
-    public class Bidder : ICloneable
+    public class Bidder : User, ICloneable
     {
         private static int BIDDER_COUNTER = 1;
 
         public int BidderNumber { get; private set; }
-        public string Name { get; private set; }
 
-        public Bidder(string name)
+        public Bidder(string name, string username, string password) : base(name, username, password)
         {
             this.BidderNumber = BIDDER_COUNTER++;
-            this.Name = name;
         }
 
-        private Bidder(Bidder bidder)
+        private Bidder(Bidder bidder) : base (bidder.Name, bidder.Username, bidder.Password)
         {
             this.BidderNumber = bidder.BidderNumber;
-            this.Name = bidder.Name;
         }
 
         public object Clone()
